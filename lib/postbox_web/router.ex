@@ -21,6 +21,8 @@ defmodule PostboxWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    post "/", PageController, :post
+    get "/payments", PaymentController, :index
   end
 
   # Other scopes may use custom stacks.

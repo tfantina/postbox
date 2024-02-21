@@ -25,7 +25,12 @@ config :postbox, PostboxWeb.Endpoint,
   debug_errors: true,
   secret_key_base: "PuvN8/t7GEnQULQg7PUcQYF03TzTtoY5XAB6vgZ72eslFejhG8sTgdZcUTgGmODC",
   watchers: [
-    esbuild: {Esbuild, :install_and_run, [:postbox, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:postbox, ~w(--sourcemap=inline --watch)]},
+    sass: {
+      DartSass,
+      :install_and_run,
+      [:default, ~w(--embed-source-map --source-map-urls=absolute --watch)]
+    }
   ]
 
 # ## SSL Support

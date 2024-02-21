@@ -1,0 +1,144 @@
+// Margins and Padding
+$breakpoints: ('', 'sm', 'md', 'lg', 'xl');
+$sizes: (0.25rem, 0.5rem, 0.75rem, 1rem, 1.25rem, 1.5rem, 3rem, 0);
+$i: 1;
+
+@function name($i, $value) {
+  $name: '';
+  @if $value != 0 {
+    $name: '-#{$i}';
+  }
+
+  @return $name;
+}
+
+@mixin sizing($type, $prefix: '') {
+  @each $value in $sizes {
+    &#{$prefix}#{name($i, $value)} {
+      #{$type}: #{$value};
+    }
+
+    @include media-sm {
+      &#{$prefix}-sm#{name($i, $value)} {
+        #{$type}: #{$value};
+      }
+    }
+
+    @include media-md {
+      &#{$prefix}-md#{name($i, $value)} {
+        #{$type}: #{$value};
+      }
+    }
+
+    @include media-lg {
+      &#{$prefix}-lg#{name($i, $value)} {
+        #{$type}: #{$value};
+      }
+    }
+
+    @include media-xl {
+      &#{$prefix}-xl#{name($i, $value)} {
+        #{$type}: #{$value};
+      }
+    }
+    $i: $i + 1;
+  }
+}
+
+@mixin sizing-axis($type, $axis1, $axis2) {
+  @each $value in $sizes {
+    &-#{$i} {
+      #{$type}-#{$axis1}: #{$value};
+      #{$type}-#{$axis2}: #{$value};
+    }
+
+    $i: $i + 1;
+  }
+}
+
+.p {
+  @include sizing('padding');
+  @include sizing('padding-top', 't');
+  @include sizing('padding-right', 'r');
+  @include sizing('padding-bottom', 'b');
+  @include sizing('padding-left', 'l');
+}
+
+
+
+.py {
+  @include sizing-axis('padding', 'top', 'bottom');
+}
+
+.px {
+  @include sizing-axis('padding', 'right', 'left');
+}
+
+.m {
+  @include sizing('margin');
+  @include sizing('mtop', 't');
+  @include sizing('mright', 'r');
+  @include sizing('mbottom', 'b');
+  @include sizing('mleft', 'l');
+}
+
+.my {
+  @include sizing-axis('margin', 'top', 'bottom');
+}
+
+.mx {
+  @include sizing-axis('margin', 'right', 'left');
+}
+
+
+.pl {
+  @include pl;
+}
+
+.pr {
+  @include pr;
+}
+
+.pt {
+  @include pt;
+}
+
+.pb {
+  @include pb;
+}
+
+.px {
+  @include px;
+}
+
+.py {
+  @include py;
+}
+
+.m {
+  @include margin;
+}
+
+.ml {
+  @include ml;
+}
+
+.mr {
+  @include mr;
+}
+
+.mt {
+  @include mt;
+}
+
+.mb {
+  @include mb;
+}
+
+.mx {
+  @include mx;
+}
+
+.my {
+  @include my;
+}
