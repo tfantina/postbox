@@ -34,3 +34,8 @@ config :logger, level: :warning
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :postbox, Postbox.Payments,
+  canada_price: "price_can",
+  us_price: "price_us",
+  international_price: "price_intl"

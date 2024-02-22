@@ -31,6 +31,11 @@ config :postbox, PostboxWeb.Endpoint,
 # at the `config/runtime.exs`.
 config :postbox, Postbox.Mailer, adapter: Swoosh.Adapters.Local
 
+# Configure Stripity Stripe
+config :stripity_stripe, :pool_options,
+  timeout: 5_000,
+  max_connections: 10
+
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.17.11",
@@ -59,3 +64,5 @@ config :phoenix, :json_library, Jason
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
+env_secrets = Path.join([__DIR__, "#{Mix.env()}.secret.exs"])
+if File.exists?(env_secrets), do: import_config("#{Mix.env()}.secret.exs")

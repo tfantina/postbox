@@ -7,6 +7,7 @@ defmodule Postbox.Repo.Migrations.CreateLetter do
       add :address, :string
       add :country, :string
       add :email, :string
+      add :paid, :boolean, default: false
 
       timestamps(type: :utc_datetime)
     end

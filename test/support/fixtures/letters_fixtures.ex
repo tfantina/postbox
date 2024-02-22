@@ -12,7 +12,9 @@ defmodule Postbox.LettersFixtures do
       attrs
       |> Enum.into(%{
         address: "some address",
-        content: "some content"
+        content: "some content",
+        country: "US",
+        paid: false
       })
       |> Postbox.Letters.create_letter()
 

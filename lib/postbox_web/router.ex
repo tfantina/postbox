@@ -23,6 +23,8 @@ defmodule PostboxWeb.Router do
     get "/", PageController, :home
     post "/", PageController, :post
     get "/payments", PaymentController, :index
+    get "/payments/success", PaymentController, :success
+    get "/payments/cancel", PaymentController, :cancel
   end
 
   # Other scopes may use custom stacks.

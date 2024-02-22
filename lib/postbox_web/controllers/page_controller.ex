@@ -20,7 +20,7 @@ defmodule PostboxWeb.PageController do
         |> put_session(:letter, letter)
         |> redirect(to: ~p"/payments")
 
-      {:error, err} ->
+      {:error, _err} ->
         conn
         |> put_flash(:letter_error, "Problem saving error")
         |> render(:home, layout: false)

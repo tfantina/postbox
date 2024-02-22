@@ -7,6 +7,7 @@ defmodule Postbox.Letters.Letter do
     field :address, :string
     field :country, :string
     field :email, :string
+    field :paid, :boolean, default: false
 
     timestamps(type: :utc_datetime)
   end
