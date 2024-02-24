@@ -58,7 +58,7 @@ $space-l-xl: clamp(2.25rem, 1.7283rem + 2.6087vi, 3.75rem);
 $space-xl-2xl: clamp(3.375rem, 2.8098rem + 2.8261vi, 5rem);
 $space-2xl-3xl: clamp(4.5rem, 3.4565rem + 5.2174vi, 7.5rem);
 
-$sizes: ($space-3xs, $space-2xs, $space-xs, $space-s $space-m, $space-l, $space-xl, $space-2xl, $space-3xl);
+$sizes: ($space-3xs, $space-2xs, $space-xs, $space-s, $space-m, $space-l, $space-xl, $space-2xl, $space-3xl);
 $sizenames: ('3xs', '2sx', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl');
 $i: 1;
 
@@ -115,7 +115,7 @@ $i: 1;
 }
 
 .my {
-  @include sizing-axis('margin-top', 'marign-bottom');
+  @include sizing-axis('margin-top', 'margin-bottom');
 }
 
 .mx {

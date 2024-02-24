@@ -1,7 +1,16 @@
 @use 'margins_and_padding';
 
-input {
+input, textarea {
     position: relative;
     box-sizing: border-box;
-    height: $space-m;
+}
+
+@mixin input($height: $space-m, $width: 100%) {
+    height: $height;
+    width: $width;
+}
+
+@mixin button($height: $space-m, $width: 100%) {
+    height: $height;
+    width: $width;
 }

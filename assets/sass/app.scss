@@ -35,9 +35,53 @@ h4, h5 {
     position: absolute;
     left: 0;
     top: 0;
+    bottom: 0;
     height: 100%;
     width: 6px;
     background-size: 6px 40px;
     background-image: repeating-linear-gradient(blue 0%, blue 25%, white 25%, white 50%, red 50%, red 75%, white 75%, white 100%);
 }
  
+
+input, select {
+    @include input($space-m);
+}
+
+textarea {
+    @include input($space-xl)
+}
+
+textarea[name="letter[content]"] {
+    @include input(calc($space-3xl * 2));
+}
+
+@mixin common_form_attributes {
+    font-family: "Montserrat";
+    font-weight: 400;
+    font-size: $space-s;
+    line-height: $space-m;
+    border: solid 1px #A5A5A5;
+    border-radius: 4px;
+}
+
+input, select, textarea {
+    @include common_form_attributes;
+}
+
+input::placeholder, textarea::placeholder {
+    font-size: $space-xs;
+}
+
+button.submit {
+    padding: $space-2xs;
+    width: 100%;
+    @include my($space-s);
+    @include common_form_attributes;
+    background-color: blue;
+    color: white;
+    transition: background-color .4s;
+}
+
+button.submit:hover {
+    background-color: #4343A5;
+}
