@@ -1,2 +1,43 @@
-@use 'cardinal/all';
+@use 'cardinal/all' as *;
+
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital@0;1&display=swap');
 // site specifics
+
+body {
+    font-family: "Montserrat";
+    font-weight: 400;
+    font-size: $space-s;
+    margin-right: 6px;
+    margin-left: 6px;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: "Archivo Black";
+}
+
+h1 {
+    font-size: $space-l;
+}
+
+h2 {
+    font-size: $space-m;
+}
+
+h3 {
+    font-size: $space-s;
+}
+
+h4, h5 {
+    font-size: $space-xs;
+}
+
+.poststripe {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 6px;
+    background-size: 6px 40px;
+    background-image: repeating-linear-gradient(blue 0%, blue 25%, white 25%, white 50%, red 50%, red 75%, white 75%, white 100%);
+}
+ 

@@ -1,23 +1,28 @@
 /* Grid */
 /* may not be needed */
-.container {
-  @include width(100vw);
-  @include center;
-  @include max-width(1100px);
+// .container {
+//   width(100vw);
+//   @include center;
+//   @include max-width(1100px);
 
-  @include media-sm {
-    @include width(95vw);
-  }
+//   @include media-sm {
+//     @include width(95vw);
+//   }
 
-  @include media-md {
-    @include width();
-  }
-}
+//   @include media-md {
+//     @include width();
+//   }
+// }
 
-@include media-md {
-  .container-md {
-    @include width();
-    @include center;
-    @include max-width(1100px);
-  }
+// @include media-md {
+//   .container-md {
+//     @include width();
+//     @include center;
+//     @include max-width(1100px);
+//   }
+// }
+
+@mixin grid($columns: 12) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
 }

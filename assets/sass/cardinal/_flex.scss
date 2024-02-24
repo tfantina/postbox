@@ -4,30 +4,19 @@
   flex-wrap: wrap;
 }
 
+@mixin f-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .f-col {
   display: flex;
   flex-direction: column;
 }
 
-.order-1 {
-  order: 1;
-}
-
-.order-2 {
-  order: 2;
-}
-
-
-.order-md-1 {
-  @include media-md {
-    order: 1;
-  }
-}
-
-.order-md-2 {
-  @include media-md {
-    order: 2;
-  }
+@mixin f-col {
+  display: flex;
+  flex-direction: column;
 }
 
 $column: calc(100% / 12);
@@ -135,4 +124,21 @@ $columns: (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
 
 .absolute {
   position: absolute;
+}
+
+@mixin center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@mixin justify-content($position: 'center') {
+  justify-content: $position;
+}
+
+@mixin align-content($position: 'center') {
+  align-content: $position;
+}
+
+@mixin align-items($position: 'center') {
+  align-items: $position;
 }

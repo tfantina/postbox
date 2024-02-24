@@ -1,0 +1,7 @@
+@use 'margins_and_padding';
+
+input {
+    position: relative;
+    box-sizing: border-box;
+    height: $space-m;
+}

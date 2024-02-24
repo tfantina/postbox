@@ -1,60 +1,93 @@
 // Margins and Padding
-$breakpoints: ('', 'sm', 'md', 'lg', 'xl');
-$sizes: (0.25rem, 0.5rem, 0.75rem, 1rem, 1.25rem, 1.5rem, 3rem, 0);
+//media queries
+@mixin media-xs {
+  @media (min-width: 520px) {
+    @content;
+  }
+}
+
+@mixin media-sm {
+  @media (min-width: 600px) {
+    @content;
+  }
+}
+
+@mixin media-md {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin media-lg {
+  @media (min-width: 992px) {
+    @content;
+  }
+}
+
+@mixin media-xl {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin media-xx {
+  @media (min-width: 1500px) {
+    @content;
+  }
+}
+
+
+// Utopia sizing
+$space-3xs: clamp(0.3125rem, 0.3125rem + 0vi, 0.3125rem);
+$space-2xs: clamp(0.5625rem, 0.5408rem + 0.1087vi, 0.625rem);
+$space-xs: clamp(0.875rem, 0.8533rem + 0.1087vi, 0.9375rem);
+$space-s: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);
+$space-m: clamp(1.6875rem, 1.6223rem + 0.3261vi, 1.875rem);
+$space-l: clamp(2.25rem, 2.163rem + 0.4348vi, 2.5rem);
+$space-xl: clamp(3.375rem, 3.2446rem + 0.6522vi, 3.75rem);
+$space-2xl: clamp(4.5rem, 4.3261rem + 0.8696vi, 5rem);
+$space-3xl: clamp(6.75rem, 6.4891rem + 1.3043vi, 7.5rem);
+
+// One up pairs
+$space-3xs-2xs: clamp(0.3125rem, 0.2038rem + 0.5435vi, 0.625rem);
+$space-2xs-xs: clamp(0.5625rem, 0.4321rem + 0.6522vi, 0.9375rem);
+$space-xs-s: clamp(0.875rem, 0.7446rem + 0.6522vi, 1.25rem);
+$space-s-m: clamp(1.125rem, 0.8641rem + 1.3043vi, 1.875rem);
+$space-m-l: clamp(1.6875rem, 1.4049rem + 1.413vi, 2.5rem);
+$space-l-xl: clamp(2.25rem, 1.7283rem + 2.6087vi, 3.75rem);
+$space-xl-2xl: clamp(3.375rem, 2.8098rem + 2.8261vi, 5rem);
+$space-2xl-3xl: clamp(4.5rem, 3.4565rem + 5.2174vi, 7.5rem);
+
+$sizes: ($space-3xs, $space-2xs, $space-xs, $space-s $space-m, $space-l, $space-xl, $space-2xl, $space-3xl);
+$sizenames: ('3xs', '2sx', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl');
 $i: 1;
 
-@function name($i, $value) {
-  $name: '';
-  @if $value != 0 {
-    $name: '-#{$i}';
-  }
 
-  @return $name;
+@function name($i) {
+  @return nth($sizenames, $i);
 }
 
 @mixin sizing($type, $prefix: '') {
   @each $value in $sizes {
-    &#{$prefix}#{name($i, $value)} {
+    &#{$prefix}-#{name($i)} {
       #{$type}: #{$value};
     }
 
-    @include media-sm {
-      &#{$prefix}-sm#{name($i, $value)} {
-        #{$type}: #{$value};
-      }
-    }
-
-    @include media-md {
-      &#{$prefix}-md#{name($i, $value)} {
-        #{$type}: #{$value};
-      }
-    }
-
-    @include media-lg {
-      &#{$prefix}-lg#{name($i, $value)} {
-        #{$type}: #{$value};
-      }
-    }
-
-    @include media-xl {
-      &#{$prefix}-xl#{name($i, $value)} {
-        #{$type}: #{$value};
-      }
-    }
     $i: $i + 1;
   }
 }
 
-@mixin sizing-axis($type, $axis1, $axis2) {
+@mixin sizing-axis($type1, $type2) {
   @each $value in $sizes {
-    &-#{$i} {
-      #{$type}-#{$axis1}: #{$value};
-      #{$type}-#{$axis2}: #{$value};
+    &-#{name($i)} {
+      #{$type1}: #{$value};
+      #{$type2}: #{$value};
     }
 
     $i: $i + 1;
   }
 }
+
 
 .p {
   @include sizing('padding');
@@ -64,14 +97,13 @@ $i: 1;
   @include sizing('padding-left', 'l');
 }
 
+.px {
+  @include sizing-axis('padding-left', 'padding-right')
+}
 
 
 .py {
-  @include sizing-axis('padding', 'top', 'bottom');
-}
-
-.px {
-  @include sizing-axis('padding', 'right', 'left');
+  @include sizing-axis('padding-top', 'padding-bottom');
 }
 
 .m {
@@ -83,62 +115,30 @@ $i: 1;
 }
 
 .my {
-  @include sizing-axis('margin', 'top', 'bottom');
+  @include sizing-axis('margin-top', 'marign-bottom');
 }
 
 .mx {
-  @include sizing-axis('margin', 'right', 'left');
+  @include sizing-axis('margin-right', 'margin-left');
 }
 
-
-.pl {
-  @include pl;
+@mixin py($amt: $space-xs) {
+  padding-top: $amt;
+  padding-bottom: $amt;
 }
 
-.pr {
-  @include pr;
+@mixin px($amt: $space-xs) {
+  padding-left: $amt;
+  padding-right: $amt;
 }
 
-.pt {
-  @include pt;
+@mixin my($amt: $space-xs) {
+ margin-top: $amt;
+ margin-bottom: $amt;
 }
 
-.pb {
-  @include pb;
+@mixin mx($amt: $space-xs) {
+ margin-left: $amt;
+ margin-right: $amt;
 }
 
-.px {
-  @include px;
-}
-
-.py {
-  @include py;
-}
-
-.m {
-  @include margin;
-}
-
-.ml {
-  @include ml;
-}
-
-.mr {
-  @include mr;
-}
-
-.mt {
-  @include mt;
-}
-
-.mb {
-  @include mb;
-}
-
-.mx {
-  @include mx;
-}
-
-.my {
-  @include my;
-}
