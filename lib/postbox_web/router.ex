@@ -65,6 +65,15 @@ defmodule PostboxWeb.Router do
     post "/users/log_in", UserSessionController, :create
   end
 
+  scope "/postmaster", PostboxWeb do
+    pipe_through [:browser, :require_authenticated_user, :require_admin_user]
+
+    live_session :require_admin_user,
+      on_mount: [{PostboxWeb.UserAuth, :ensure_admin}] do
+      live "/", PostmasterLive, :index
+    end
+  end
+
   scope "/", PostboxWeb do
     pipe_through [:browser, :require_authenticated_user]
 

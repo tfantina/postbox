@@ -211,6 +211,23 @@ defmodule PostboxWeb.UserAuth do
     end
   end
 
+  @doc """
+  Used for routes that require the user to be a Postmaster (admin)
+  """
+  def require_admin_user(conn, _opts) do
+    IO.inspect(conn.assigns[:current_user])
+
+    if conn.assigns[:current_user] do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You must log in to access this page.")
+      |> maybe_store_return_to()
+      |> redirect(to: ~p"/users/log_in")
+      |> halt()
+    end
+  end
+
   defp put_token_in_session(conn, token) do
     conn
     |> put_session(:user_token, token)

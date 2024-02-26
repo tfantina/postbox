@@ -11,6 +11,8 @@ config :postbox,
   ecto_repos: [Postbox.Repo],
   generators: [timestamp_type: :utc_datetime]
 
+config :postbox, Postbox.Repo, migration_primary_key: [type: :uuid]
+
 # Configures the endpoint
 config :postbox, PostboxWeb.Endpoint,
   url: [host: "localhost"],
