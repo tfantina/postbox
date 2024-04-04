@@ -15,7 +15,7 @@ defmodule Postbox.Repo.Migrations.CreateUsersAuthTables do
 
     create unique_index(:users, [:email])
 
-    create table(:users_tokens) do
+    create table(:users_tokens, primary_key: false) do
       uuid_primary_key()
       add :user_id, uuid_references(:users, on_delete: :delete_all), null: false
       add :token, :binary, null: false

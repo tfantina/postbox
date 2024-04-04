@@ -3,6 +3,7 @@ defmodule Postbox.Repo.Migrations.CreateLetter do
 
   def change do
     create table(:letter, primary_key: false) do
+      uuid_primary_key()
       add :content, :string
       add :address, :string
       add :country, :string

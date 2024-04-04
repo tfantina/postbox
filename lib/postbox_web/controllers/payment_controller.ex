@@ -5,15 +5,12 @@ defmodule PostboxWeb.PaymentController do
   use PostboxWeb, :controller
 
   def index(conn, _params) do
+    IO.inspect(label: "IT GETS TO HERE ALRIGHRT!")
     %{id: id} = get_session(conn, :letter)
 
     params = Payments.stripe_params(id)
 
     {:ok, session} = Stripe.create(params)
-
-    # conn
-    # |> assign(:letter, letter)
-    # |> render(:index, layout: false)
 
     conn
     |> put_status(303)

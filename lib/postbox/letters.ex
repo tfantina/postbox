@@ -73,6 +73,10 @@ defmodule Postbox.Letters do
     |> Repo.update()
   end
 
+  def update_letter(id, attrs) do
+    id |> get_letter!() |> update_letter(attrs)
+  end
+
   @doc """
   Deletes a letter.
 

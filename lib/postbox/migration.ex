@@ -1,5 +1,7 @@
 defmodule Postbox.Migration do
   @moduledoc false
+  alias Ecto.Migration
+  require Ecto.Migration
 
   @doc false
   defmacro __using__(_) do
@@ -7,6 +9,12 @@ defmodule Postbox.Migration do
       use Ecto.Migration
       import Postbox.Migration
     end
+  end
+
+  @doc false
+  def standard_tracking_fields do
+    Migration.add(:deleted_at, :utc_datetime)
+    Migration.timestamps()
   end
 
   @doc false

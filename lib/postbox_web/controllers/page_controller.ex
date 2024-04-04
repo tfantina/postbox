@@ -22,7 +22,9 @@ defmodule PostboxWeb.PageController do
 
       {:error, _err} ->
         conn
-        |> put_flash(:letter_error, "Problem saving error")
+        |> assign(:letter, Letter.changeset(params))
+        |> assign(:countries, Countries.all())
+        |> put_flash(:error, "Problem sending please ensure your letter is filled out")
         |> render(:home, layout: false)
     end
   end
