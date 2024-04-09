@@ -72,6 +72,7 @@ defmodule Postbox.MixProject do
       "assets.build": ["esbuild postbox"],
       "assets.deploy": [
         "esbuild postbox --minify",
+        "sass default --no-source-map --style=compressed",
         "phx.digest"
       ]
     ]
