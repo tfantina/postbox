@@ -23,8 +23,15 @@ defmodule PostboxWeb.Router do
     get "/", PageController, :home
     post "/", PageController, :post
     get "/payments", PaymentController, :index
+    get "/payments/processing", PaymentController, :processing
+    get "/payments/error", PaymentController, :error
     get "/payments/success", PaymentController, :success
     get "/payments/cancel", PaymentController, :cancel
+  end
+
+  scope "/webhook/payments", PostboxWeb do
+    pipe_through :api
+    post "/", PaymentController, :webhook
   end
 
   # Other scopes may use custom stacks.

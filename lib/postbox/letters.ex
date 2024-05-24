@@ -69,7 +69,7 @@ defmodule Postbox.Letters do
   """
   def update_letter(%Letter{} = letter, attrs) do
     letter
-    |> Letter.changeset(attrs)
+    |> Letter.changeset_paid(attrs)
     |> Repo.update()
   end
 

@@ -20,4 +20,10 @@ defmodule Postbox.Letters.Letter do
     |> cast(attrs, [:content, :address, :country])
     |> validate_required([:content, :address, :country])
   end
+
+  def changeset_paid(letter, attrs) do
+    letter
+    |> cast(attrs, [:paid])
+    |> validate_required([:paid])
+  end
 end
