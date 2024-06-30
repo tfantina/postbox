@@ -67,7 +67,8 @@ if config_env() == :prod do
     check_origin: ["https://postalbox.xyz"]
 
   config :stripity_stripe,
-    api_key: System.get_env("STRIPE_KEY")
+    api_key: System.get_env("STRIPE_KEY"),
+    signing_secret: System.get_env("STRIPE_WEBHOOK")
 
   config :postbox, Postbox.Payments,
     canada_price: System.get_env("CANADA_PRICE"),
