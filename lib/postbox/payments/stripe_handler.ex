@@ -1,25 +1,38 @@
 defmodule Postbox.StripeHandler do
-  @behaviour Plug
+  @behaviour Stripe.WebhookHandler
 
-  alias Plug.Conn
-
-  def init(config), do: config
-
-  def call(%{request_path: "/webhook/payments"} = conn, _params) do
-    signing_secret = Application.get_env(:stripity_stripe, :webhook_key)
-    [stripe_signature] = Plug.Conn.get_req_header(conn, "stripe-signature")
-
-    with {:ok, body, _} = Plug.Conn.read_body(conn),
-         {:ok, stripe_event} =
-           Stripe.Webhook.construct_event(body, stripe_signature, signing_secret) do
-      Plug.Conn.assign(conn, :stripe_event, stripe_event)
-    else
-      err ->
-        conn
-        |> Conn.send_resp(:bad_request, err)
-        |> Conn.halt()
-    end
+  @impl true
+  def handle_event(%Stripe.Event{type: "invoice.paid"} = event) do
+    IO.inspect("Payment Success")
+    IO.inspect(event)
+    # Continue to provision the subscription as payments continue to be made.
+    # Store the status in your database and check when a user accesses your service.
+    # This approach helps you avoid hitting rate limits.
+    :ok
   end
 
-  def call(conn, _), do: conn
+  @impl true
+  def handle_event(%Stripe.Event{type: "invoice.payment_failed"} = event) do
+    IO.inspect("Payment Failed")
+    IO.inspect(event)
+    # The payment failed or the customer does not have a valid payment method.
+    # The subscription becomes past_due. Notify your customer and send them to the
+    # customer portal to update their payment information.
+    :ok
+  end
+
+  @impl true
+  def handle_event(%Stripe.Event{type: "checkout.session.completed"} = event) do
+    IO.inspect("Checkout Session Completed")
+    IO.inspect(event)
+    # Payment is successful and the subscription is created.
+    # You should provision the subscription and save the customer ID to your database.
+    :ok
+  end
+
+  # Return HTTP 200 for unhandled events
+  @impl true
+  def handle_event(event) do
+    IO.inspect(event, label: "--------othersidewise----------")
+  end
 end

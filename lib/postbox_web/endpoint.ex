@@ -41,7 +41,10 @@ defmodule PostboxWeb.Endpoint do
   plug Plug.RequestId
   plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
 
-  # plug Postbox.StripeHandler
+  plug Stripe.WebhookPlug,
+    at: "/webhook/stripe",
+    handler: Postbox.StripeHandler,
+    secret: {Application, :get_env, [:stripity_stripe, :webhook_key]}
 
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
