@@ -21,7 +21,7 @@ defmodule Postbox.Payments do
         }
       ],
       mode: "payment",
-      success_url: url <> "/payments/processing",
+      success_url: url <> "/payments/success",
       cancel_url: url <> "/payments/cancel",
       automatic_tax: %{enabled: false},
       client_reference_id: letter.id,

@@ -1,25 +1,27 @@
 defmodule Postbox.StripeHandler do
-  @behaviour Plug
+  @moduledoc "Handles Stripe payments"
+  alias Postbox.Letters
+  alias Postbox.Letters.Letter
 
-  alias Plug.Conn
+  @behaviour Stripe.WebhookHandler
+  require Logger
 
-  def init(config), do: config
-
-  def call(%{request_path: "/webhook/payments"} = conn, _params) do
-    signing_secret = Application.get_env(:stripity_stripe, :webhook_key)
-    [stripe_signature] = Plug.Conn.get_req_header(conn, "stripe-signature")
-
-    with {:ok, body, _} = Plug.Conn.read_body(conn),
-         {:ok, stripe_event} =
-           Stripe.Webhook.construct_event(body, stripe_signature, signing_secret) do
-      Plug.Conn.assign(conn, :stripe_event, stripe_event)
+  @impl true
+  @spec handle_event(Stripe.Event.t()) :: {:ok, %Letter{}} | :ok | {:error, :payment_event}
+  def handle_event(%Stripe.Event{type: "checkout.session.completed"} = event) do
+    with %{data: %{object: %{client_reference_id: id}}} <- event,
+         %Letter{} = letter <- Letters.get_letter!(id) do
+      Letters.update_letter(letter, %{paid: true})
     else
       err ->
-        conn
-        |> Conn.send_resp(:bad_request, err)
-        |> Conn.halt()
+        Logger.warning("PAYMENT ERROR: #{inspect(err)} - CHECKOUT EVENT - #{inspect(event)}")
+        {:error, :payment_event}
     end
   end
 
-  def call(conn, _), do: conn
+  # Return HTTP 200 for unhandled events
+  @impl true
+  def handle_event(_event) do
+    :ok
+  end
 end

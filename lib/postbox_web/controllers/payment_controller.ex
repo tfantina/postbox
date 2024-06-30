@@ -18,16 +18,6 @@ defmodule PostboxWeb.PaymentController do
     |> redirect(external: session.url)
   end
 
-  def processing(conn, _params) do
-    with %{id: id} <- get_session(conn, :letter),
-         %Letter{} = letter <- Letters.get_letter!(id),
-         {:ok, _letter} <- Letters.update_letter(letter, %{paid: true}) do
-      redirect(conn, to: ~p"/payments/success")
-    else
-      _ -> redirect(conn, to: ~p"/payments/error")
-    end
-  end
-
   def success(conn, _params) do
     conn
     |> put_flash(
@@ -54,11 +44,4 @@ defmodule PostboxWeb.PaymentController do
     )
     |> redirect(to: ~p"/")
   end
-
-  def webhook(%{assigns: %{stripe_event: _stripe_event}} = conn, _params) do
-    # Letters.update_letter(id, %{paid: true})
-    json(conn, %{"status" => "ok"})
-  end
-
-  def webhook(conn, _), do: json(conn, %{"status" => "ok"})
 end
