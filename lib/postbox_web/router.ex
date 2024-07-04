@@ -23,6 +23,8 @@ defmodule PostboxWeb.Router do
     get "/", PageController, :home
     post "/", PageController, :post
     get "/payments", PaymentController, :index
+    get "/payments/processing", PaymentController, :processing
+    get "/payments/error", PaymentController, :error
     get "/payments/success", PaymentController, :success
     get "/payments/cancel", PaymentController, :cancel
   end

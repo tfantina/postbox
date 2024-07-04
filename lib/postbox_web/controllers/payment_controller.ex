@@ -2,11 +2,11 @@ defmodule PostboxWeb.PaymentController do
   @moduledoc false
   alias Postbox.{Letters, Payments}
   alias Stripe.Checkout.Session, as: Stripe
+  alias Postbox.Letters.Letter
   use PostboxWeb, :controller
 
   def index(conn, _params) do
-    IO.inspect(label: "IT GETS TO HERE ALRIGHRT!")
-    %{id: id} = get_session(conn, :letter)
+    %{id: id} = letter = get_session(conn, :letter)
 
     params = Payments.stripe_params(id)
 
@@ -14,24 +14,26 @@ defmodule PostboxWeb.PaymentController do
 
     conn
     |> put_status(303)
+    |> put_session(:letter, letter)
     |> redirect(external: session.url)
   end
 
   def success(conn, _params) do
-    %{id: id} = get_session(conn, :letter)
+    conn
+    |> put_flash(
+      :letter_success,
+      "Payment received we will mail your letter in the next few days!"
+    )
+    |> render(:success, layout: false)
+  end
 
-    case Letters.update_letter(id, %{paid: true}) do
-      {:ok, _letter} ->
-        conn
-        |> put_flash(
-          :letter_succces,
-          "Payment received we will mail your letter in the next few days!"
-        )
-        |> render(:success, layout: false)
-
-      {:error, _} ->
-        "error"
-    end
+  def error(conn, _params) do
+    conn
+    |> put_flash(
+      :letter_error,
+      "There was a problem with your payment please try again or contact us!"
+    )
+    |> render(:error, layout: false)
   end
 
   def cancel(conn, _params) do

@@ -7,8 +7,8 @@ body {
     font-family: "Montserrat";
     font-weight: 400;
     font-size: $space-s;
-    margin-right: 6px;
-    margin-left: 6px;
+    margin: 0;
+    padding: 0;
 }
 
 h1, h2, h3, h4, h5 {
@@ -29,6 +29,12 @@ h3 {
 
 h4, h5 {
     font-size: $space-xs;
+}
+
+.wrapper {
+    position: relative;
+    padding: 0 10px 0 16px;
+    margin: 0;
 }
 
 .poststripe {
@@ -87,5 +93,5 @@ button.submit:hover {
 }
 
 .letter-content {
-    height: 99vh;
+    min-height: 99vh;
 }

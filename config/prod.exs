@@ -18,11 +18,3 @@ config :logger, level: :info
 
 # Runtime production configuration, including reading
 # of environment variables, is done on config/runtime.exs.
-
-config :stripity_stripe,
-  api_key: System.get_env("STRIPE_KEY")
-
-config :postbox, Postbox.Payments,
-  canada_price: System.get_env("CANADA_PRICE"),
-  us_price: System.get_env("US_PRICE"),
-  international_price: System.get_env("INTERNATIONAL_PRICE")

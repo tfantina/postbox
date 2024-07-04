@@ -48,7 +48,7 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
-  host = System.get_env("PHX_HOST") || "example.com"
+  host = System.get_env("PHX_HOST") || "postalbox.xyz"
   port = String.to_integer(System.get_env("PORT") || "4000")
 
   config :postbox, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
@@ -63,7 +63,17 @@ if config_env() == :prod do
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
       port: port
     ],
-    secret_key_base: secret_key_base
+    secret_key_base: secret_key_base,
+    check_origin: ["https://postalbox.xyz"]
+
+  config :stripity_stripe,
+    api_key: System.get_env("STRIPE_KEY"),
+    signing_secret: System.get_env("STRIPE_WEBHOOK")
+
+  config :postbox, Postbox.Payments,
+    canada_price: System.get_env("CANADA_PRICE"),
+    us_price: System.get_env("US_PRICE"),
+    international_price: System.get_env("INTERNATIONAL_PRICE")
 
   # ## SSL Support
   #

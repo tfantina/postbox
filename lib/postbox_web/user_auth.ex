@@ -215,8 +215,6 @@ defmodule PostboxWeb.UserAuth do
   Used for routes that require the user to be a Postmaster (admin)
   """
   def require_admin_user(conn, _opts) do
-    IO.inspect(conn.assigns[:current_user])
-
     if conn.assigns[:current_user] do
       conn
     else
