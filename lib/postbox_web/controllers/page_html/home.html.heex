@@ -1,46 +1,49 @@
 <div class="letter-content">
-<link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
-<.flash_group flash={@flash} />
-<h1>Postalbox</h1>
-<h2>Send like email 💌, receive like snaimail 🐌</h2>
-<p>
-Fill out the form below and I'll send your letter to any address provided.
-</p>
-<p>
-Standard postage and processing fees:
-<ul>
-  <li>North America: $2.99 CAD</li>
-  <li>Elsewhere: $3.99 CAD</li>
-</ul>
-</p>
+  <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
+  <.flash_group flash={@flash} />
+  <h1>Postalbox</h1>
+  <h2>Send like email 💌, receive like snaimail 🐌</h2>
+  <p>
+    Fill out the form below and I'll send your letter to any address provided.
+  </p>
+  <p>
+    Standard postage and processing fees:
+    <ul>
+      <li>North America: $2.99 CAD</li>
+      <li>Elsewhere: $3.99 CAD</li>
+    </ul>
+  </p>
 
-<.form :let={f} for={@letter} action={Routes.page_path(@conn, :post)} id="form">
-  <div class="my-s">
-    <label>Letter*</label>
-    <.input field={f[:content]} type="textarea" class="letter-content"/>
-  </div>
-  <div class="my-s">
-    <label>Address*</label>
-    <.input field={f[:address]} type="textarea" placeholder="this is where we send your letter- be sure it's correct"/>
-  </div>
-  <div class="my-s">
-    <label>Country*</label>
-    <.input field={f[:country]} type="select" options={@countries}/>
-  </div>
-  <div class="my-s">
-    <label>Email</label>
-    <.input field={f[:email]}  placeholder="if you want to keep in touch..." />
-  </div>
+  <.form :let={f} for={@letter} action={Routes.page_path(@conn, :post)} id="form">
+    <div class="my-s">
+      <label>Letter*</label>
+      <.input field={f[:content]} type="textarea" class="letter-content" />
+    </div>
+    <div class="my-s">
+      <label>Address*</label>
+      <.input
+        field={f[:address]}
+        type="textarea"
+        placeholder="this is where we send your letter- be sure it's correct"
+      />
+    </div>
+    <div class="my-s">
+      <label>Country*</label>
+      <.input field={f[:country]} type="select" options={@countries} />
+    </div>
+    <div class="my-s">
+      <label>Email</label>
+      <.input field={f[:email]} placeholder="if you want to keep in touch..." />
+    </div>
 
-  <button class="submit">Post</button>
-</.form>
+    <button class="submit">Post</button>
+  </.form>
 </div>
 <div class="faq">
-<h2>Wait what?</h2>
-<p>
-Postalbox marries the ease of sending an email with the joy of receiving a physical letter. Draft a letter to your friend and I'll print it out and post it. Your letter will arrive in standard post time (SPT).
-</p>
-
+  <h2>Wait what?</h2>
+  <p>
+    Postalbox marries the ease of sending an email with the joy of receiving a physical letter. Draft a letter to your friend and I'll print it out and post it. Your letter will arrive in standard post time (SPT).
+  </p>
 <h2>Seriously... What?</h2>
 <p>
 I find the dichotomy between the modern world and the low-tech solutions of yesteyear fasciating. At it's core, Postalbox is an inquery into our relationship with 

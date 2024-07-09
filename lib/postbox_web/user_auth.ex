@@ -1,4 +1,5 @@
 defmodule PostboxWeb.UserAuth do
+  @moduledoc false
   use PostboxWeb, :verified_routes
 
   import Plug.Conn

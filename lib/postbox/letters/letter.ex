@@ -1,4 +1,5 @@
 defmodule Postbox.Letters.Letter do
+  @moduledoc false
   use Postbox.Schema
   import Ecto.Changeset
 

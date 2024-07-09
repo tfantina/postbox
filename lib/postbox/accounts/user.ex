@@ -1,4 +1,5 @@
 defmodule Postbox.Accounts.User do
+  @moduledoc false
   use Postbox.Schema
   import Ecto.Changeset
 
