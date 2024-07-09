@@ -179,7 +179,6 @@ defmodule PostboxWeb.UserAuth do
     %{assigns: %{current_user: %{role: role}}} = socket
 
     if role == "admin" do
-      IO.inspect(label: "--------HELLO YOLO-----------")
       {:cont, socket}
     else
       socket =

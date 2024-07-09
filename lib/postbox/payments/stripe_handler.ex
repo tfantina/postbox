@@ -7,7 +7,7 @@ defmodule Postbox.StripeHandler do
   require Logger
 
   @impl true
-  @spec handle_event(Stripe.Event.t()) :: {:ok, %Letter{}} | :ok | {:error, :payment_event}
+  @spec handle_event(Stripe.Event.t()) :: {:ok, Letter.t()} | :ok | {:error, :payment_event}
   def handle_event(%Stripe.Event{type: "checkout.session.completed"} = event) do
     with %{data: %{object: %{client_reference_id: id}}} <- event,
          %Letter{} = letter <- Letters.get_letter!(id) do
