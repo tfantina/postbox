@@ -96,3 +96,16 @@ button.submit:hover {
 .letter-content {
     min-height: 99vh;
 }
+
+@media print {
+  .letter-content {
+    margin: 10mm;
+    page-break-after: always;
+  }  
+  
+  .letter-meta {
+    marign: 10mm;
+  }
+}
+
+@page { size: auto;  margin-top: 0mm; margin-bottom: 0mm; padding-top: 20rem; padding-bottom: 5mm;}

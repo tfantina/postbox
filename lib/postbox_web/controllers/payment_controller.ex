@@ -1,8 +1,7 @@
 defmodule PostboxWeb.PaymentController do
   @moduledoc false
-  alias Postbox.{Letters, Payments}
+  alias Postbox.Payments
   alias Stripe.Checkout.Session, as: Stripe
-  alias Postbox.Letters.Letter
   use PostboxWeb, :controller
 
   def index(conn, _params) do

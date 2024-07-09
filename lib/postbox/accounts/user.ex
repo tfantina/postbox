@@ -6,6 +6,7 @@ defmodule Postbox.Accounts.User do
     field :email, :string
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
+    field :role, :string
     field :confirmed_at, :naive_datetime
 
     timestamps(type: :utc_datetime)
