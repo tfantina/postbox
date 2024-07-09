@@ -73,6 +73,7 @@ defmodule PostboxWeb.Router do
     live_session :require_admin_user,
       on_mount: [{PostboxWeb.UserAuth, :ensure_admin}] do
       live "/", PostmasterLive, :index
+      live "/:id", PostmasterShowLive, :show
     end
   end
 
