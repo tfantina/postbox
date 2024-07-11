@@ -1,18 +1,19 @@
 <div class="letter-content">
-  <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
-  <.flash_group flash={@flash} />
-  <h1>Postalbox</h1>
-  <h2>Send like email 💌, receive like snaimail 🐌</h2>
-  <p>
-    Fill out the form below and I'll send your letter to any address provided.
-  </p>
-  <p>
-    Standard postage and processing fees:
-    <ul>
-      <li>North America: $2.99 CAD</li>
-      <li>Elsewhere: $3.99 CAD</li>
-    </ul>
-  </p>
+
+<link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
+<.flash_group flash={@flash} />
+<h1>Postalbox</h1>
+<h2>Send like email 💌, receive like snailmail 🐌</h2>
+<p>
+Fill out the form below and I'll send your letter to any address provided.
+</p>
+<p>
+Standard postage and processing fees:
+<ul>
+  <li>North America: $2.99 CAD</li>
+  <li>Elsewhere: $3.99 CAD</li>
+</ul>
+</p>
 
   <.form :let={f} for={@letter} action={Routes.page_path(@conn, :post)} id="form">
     <div class="my-s">
