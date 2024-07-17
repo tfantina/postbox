@@ -55,9 +55,7 @@ defmodule Postbox.Letters do
   def create_letter(attrs \\ %{}) do
     %Letter{}
     |> Letter.changeset(attrs)
-    |> IO.inspect(label: "WOW")
     |> Repo.insert()
-    |> IO.inspect(label: "MMMK")
   end
 
   @doc """
