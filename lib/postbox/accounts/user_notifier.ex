@@ -1,4 +1,5 @@
 defmodule Postbox.Accounts.UserNotifier do
+  @moduledoc false
   import Swoosh.Email
 
   alias Postbox.Mailer

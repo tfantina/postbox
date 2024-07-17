@@ -1,4 +1,5 @@
 defmodule Postbox.Accounts.UserToken do
+  @moduledoc false
   use Postbox.Schema
   import Ecto.Query
   alias Postbox.Accounts.UserToken

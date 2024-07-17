@@ -1,4 +1,5 @@
 <div class="letter-content">
+
 <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
 <.flash_group flash={@flash} />
 <h1>Postalbox</h1>
@@ -14,33 +15,36 @@ Standard postage and processing fees:
 </ul>
 </p>
 
-<.form :let={f} for={@letter} action={Routes.page_path(@conn, :post)} id="form">
-  <div class="my-s">
-    <label>Letter*</label>
-    <.input field={f[:content]} type="textarea" class="letter-content"/>
-  </div>
-  <div class="my-s">
-    <label>Address*</label>
-    <.input field={f[:address]} type="textarea" placeholder="this is where we send your letter- be sure it's correct"/>
-  </div>
-  <div class="my-s">
-    <label>Country*</label>
-    <.input field={f[:country]} type="select" options={@countries}/>
-  </div>
-  <div class="my-s">
-    <label>Email</label>
-    <.input field={f[:email]}  placeholder="if you want to keep in touch..." />
-  </div>
+  <.form :let={f} for={@letter} action={Routes.page_path(@conn, :post)} id="form">
+    <div class="my-s">
+      <label>Letter*</label>
+      <.input field={f[:content]} type="textarea" class="letter-content" />
+    </div>
+    <div class="my-s">
+      <label>Address</label>
+        <div class="address-grid">
+          <input type="hidden" name="letter[address_line_1]" value="" id="map-fill--hidden" />
+          <input name="letter[address_line_1]" autocomplete="address-line1" placeholder="street" id="map-fill" />
+          <input name="letter[address_line_2]" autocomplete="address-line2" placeholder="apartment or unit (optional)" />
+          <input name="letter[city]" autocomplete="address-level2" placeholder="city" />
+          <input name="letter[state]"  autocomplete="address-level1" placeholder="state or province" />
+          <input name="letter[postal_code]"  autocomplete="postal-code" placeholder="postal-code"/>
+          <input name="letter[country]" autocomplete="country-name" placeholder="country" />
+        </div>
+    </div>
+    <div class="my-s">
+      <label>Email</label>
+      <.input field={f[:email]} placeholder="if you want to keep in touch..." />
+    </div>
 
-  <button class="submit">Post</button>
-</.form>
+    <button class="submit">Post</button>
+  </.form>
 </div>
 <div class="faq">
-<h2>Wait what?</h2>
-<p>
-Postalbox marries the ease of sending an email with the joy of receiving a physical letter. Draft a letter to your friend and I'll print it out and post it. Your letter will arrive in standard post time (SPT).
-</p>
-
+  <h2>Wait what?</h2>
+  <p>
+    Postalbox marries the ease of sending an email with the joy of receiving a physical letter. Draft a letter to your friend and I'll print it out and post it. Your letter will arrive in standard post time (SPT).
+  </p>
 <h2>Seriously... What?</h2>
 <p>
 I find the dichotomy between the modern world and the low-tech solutions of yesteyear fasciating. At it's core, Postalbox is an inquery into our relationship with 
