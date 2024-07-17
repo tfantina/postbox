@@ -79,6 +79,50 @@ input::placeholder, textarea::placeholder {
     font-size: $space-xs;
 }
 
+.address-grid {
+    display: grid;
+
+    input {
+       @include input($space-m);
+       margin-top: $space-2xs;
+    }
+
+    @include media-md {
+        display: grid;
+        grid-gap: $space-2xs;
+        grid-template-areas:
+                "st st st no"
+                "ct ct pv pv"
+                "pc pc pc pc"
+                "cu cu cu cu";
+    }
+
+    input[name="letter[address_line_1] address-search"] {
+        grid-area: st;
+    }
+
+    input[name="letter[address_line_2]"] {
+        grid-area: no;
+    }
+
+    input[name="letter[city]"] {
+        grid-area: ct;
+    }
+
+    input[name="letter[province]"] {
+        grid-area: pv;
+    }
+
+    input[name="letter[postal-code]"] {
+        grid-area: pc;
+    }
+
+    input[name="letter[country]"] {
+        grid-area: cu;
+    }
+
+}
+
 button.submit {
     padding: $space-2xs;
     width: 100%;

@@ -21,16 +21,16 @@ Standard postage and processing fees:
       <.input field={f[:content]} type="textarea" class="letter-content" />
     </div>
     <div class="my-s">
-      <label>Address*</label>
-      <.input
-        field={f[:address]}
-        type="textarea"
-        placeholder="this is where we send your letter- be sure it's correct"
-      />
-    </div>
-    <div class="my-s">
-      <label>Country*</label>
-      <.input field={f[:country]} type="select" options={@countries} />
+      <label>Address</label>
+        <div class="address-grid">
+          <input type="hidden" name="letter[address_line_1]" value="" id="map-fill--hidden" />
+          <input name="letter[address_line_1]" autocomplete="address-line1" placeholder="street" id="map-fill" />
+          <input name="letter[address_line_2]" autocomplete="address-line2" placeholder="apartment or unit (optional)" />
+          <input name="letter[city]" autocomplete="address-level2" placeholder="city" />
+          <input name="letter[state]"  autocomplete="address-level1" placeholder="state or province" />
+          <input name="letter[postal_code]"  autocomplete="postal-code" placeholder="postal-code"/>
+          <input name="letter[country]" autocomplete="country-name" placeholder="country" />
+        </div>
     </div>
     <div class="my-s">
       <label>Email</label>

@@ -5,7 +5,11 @@ defmodule Postbox.Letters.Letter do
 
   schema "letter" do
     field :content, :string
-    field :address, :string
+    field :address_line_1, :string
+    field :address_line_2, :string
+    field :city, :string
+    field :province, :string
+    field :postal_code, :string
     field :country, :string
     field :email, :string
     field :paid, :boolean, default: false
@@ -15,13 +19,16 @@ defmodule Postbox.Letters.Letter do
     timestamps(type: :utc_datetime)
   end
 
+  @fields ~w[content address_line_1 address_line_2 city province postal_code country email]a
+  @required @fields -- ~w[address_line_2 province email]a
+
   @doc false
   def changeset(attrs), do: changeset(%__MODULE__{}, attrs)
 
   def changeset(letter, attrs) do
     letter
-    |> cast(attrs, [:content, :address, :country])
-    |> validate_required([:content, :address, :country])
+    |> cast(attrs, @fields)
+    |> validate_required(@required)
   end
 
   def changeset_paid(letter, attrs) do
