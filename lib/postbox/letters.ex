@@ -21,6 +21,7 @@ defmodule Postbox.Letters do
     Letter
     |> from(as: :l)
     |> where([l], is_nil(l.deleted_at))
+    |> order_by([l], [desc: l.status == "new", desc: l.status == "printed", desc: l.status == "sent", desc: l.status == "refunded" ])
     |> Repo.all()
   end
 
@@ -97,9 +98,9 @@ defmodule Postbox.Letters do
   end
 
   @doc """
-    Soft delete for a letter. 
+    Soft delete for a letter.
 
-    ## Examples 
+    ## Examples
         iex> soft_delete_letter(letter)
         {:ok, %Letter{}}
   """

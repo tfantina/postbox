@@ -11,6 +11,7 @@ defmodule PostboxWeb.PostmasterLive do
       <thead>
         <th>Date</th>
         <th>Address</th>
+        <th>Line 2</th>
         <th>Country</th>
         <th>Paid?</th>
         <th>Print</th>
@@ -25,8 +26,9 @@ defmodule PostboxWeb.PostmasterLive do
             phx-value-id={change.data.id}
           >
             <tr>
-              <td><%= change.data.inserted_at %></td>
-              <td><%= change.data.address %></td>
+              <td><%= Calendar.strftime(change.data.inserted_at, "%b %d, %Y") %></td>
+              <td><%= change.data.address_line_1 %></td>
+              <td><%= change.data.address_line_2 %></td>
               <td><%= change.data.country %></td>
               <td><%= change.data.paid %></td>
               <td>
@@ -39,7 +41,7 @@ defmodule PostboxWeb.PostmasterLive do
                   name="status"
                   id={change.data.id}
                   value={change.data.status}
-                  options={["printed", "sent", "refunded"]}
+                  options={["new", "printed", "sent", "refunded"]}
                 />
               </td>
               <td>

@@ -11,7 +11,12 @@ defmodule PostboxWeb.PostmasterShowLive do
 
     <div class="letter-meta">
       <p>
-        <%= @letter.address %>
+        <%= @letter.address_line_1 %>
+        <%= @letter.address_line_2 %>
+      </p>
+      <p>
+        <%= @letter.city %>,
+        <%= @letter.postal_code %>
       </p>
       <p>
         <%= @letter.country %>
