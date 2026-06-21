@@ -42,7 +42,7 @@
       # them here, so they can be loaded by Credo before running the analysis.
       #
       requires: [
-        "./lib/postbox/credo/named_imports.ex"
+        # "./lib/postbox/credo/named_imports.ex"
       ],
       #
       # If you want to enforce a style guide and need a more traditional linting
@@ -117,7 +117,7 @@
           {Credo.Check.Readability.UnnecessaryAliasExpansion, []},
           {Credo.Check.Readability.VariableNames, []},
           {Credo.Check.Readability.WithSingleClause, []},
-          {Credo.Check.Readability.NamedImports},
+          #  {Credo.Check.Readability.NamedImports},
 
           #
           ## Refactoring Opportunities

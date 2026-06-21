@@ -47,7 +47,7 @@ h4, h5 {
     background-size: 6px 40px;
     background-image: repeating-linear-gradient(blue 0%, blue 25%, white 25%, white 50%, red 50%, red 75%, white 75%, white 100%);
 }
- 
+
 
 input, select {
     @include input($space-m);
@@ -145,8 +145,8 @@ button.submit:hover {
   .letter-content {
     margin: 10mm;
     page-break-after: always;
-  }  
-  
+  }
+
   .letter-meta {
     marign: 10mm;
   }

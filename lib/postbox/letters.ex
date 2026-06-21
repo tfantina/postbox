@@ -42,6 +42,16 @@ defmodule Postbox.Letters do
   def get_letter!(id), do: Repo.get!(Letter, id)
 
   @doc """
+  Gets letters that have not been paid from before a specific date
+  """
+  def get_unpaid(datetime) do
+    Letter
+    |> from(as: :l)
+    |> where([l], l.paid == false and l.inserted_at < ^datetime)
+    |> Repo.all()
+  end
+
+  @doc """
   Creates a letter.
 
   ## Examples

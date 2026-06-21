@@ -70,8 +70,9 @@ defmodule Postbox.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": ["esbuild.install --if-missing"],
-      "assets.build": ["esbuild postbox"],
+      "assets.build": ["cmd --cd assets npm ci", "esbuild postbox"],
       "assets.deploy": [
+        "cmd --cd assets npm ci",
         "esbuild postbox --minify",
         "sass default --no-source-map --style=compressed",
         "phx.digest"

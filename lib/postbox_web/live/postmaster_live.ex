@@ -7,6 +7,7 @@ defmodule PostboxWeb.PostmasterLive do
   def render(assigns) do
     ~H"""
     <h1>Letters</h1>
+    <button role="button" phx-click="clear_unpaid" confirm="Are you sure?">Clear Unpaid</button>
     <table>
       <thead>
         <th>Date</th>
@@ -79,9 +80,9 @@ defmodule PostboxWeb.PostmasterLive do
     %{"status" => status, "id" => id} = params
     %{assigns: %{letters_changesets: changesets}} = socket
 
-    chagneset = Enum.find(changesets, &(&1.data.id == id))
+   changeset = Enum.find(changesets, &(&1.data.id == id))
 
-    chagneset.data
+   changeset.data
     |> Letter.changeset_status(%{"status" => status})
     |> Repo.update()
 
@@ -105,5 +106,17 @@ defmodule PostboxWeb.PostmasterLive do
         socket = put_flash(socket, :error, "Could not delete letter")
         {:noreply, socket}
     end
+  end
+
+  def handle_event("clear_unpaid", _, socket) do
+
+   DateTime.utc_now()
+   |> DateTime.shift(day: -1)
+   |> Letters.get_unpaid()
+   |> Enum.map(& Letters.delete_letter(&1))
+
+   socket = assign(socket, :letters_changesets, Letters.letters_changesets())
+
+   {:noreply, socket}
   end
 end
